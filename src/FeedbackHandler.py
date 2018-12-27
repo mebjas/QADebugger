@@ -1,28 +1,33 @@
 import sys
-import json
 from flask import Flask, request, jsonify, abort, send_from_directory, render_template
-from functools import wraps
 from ConfigImport import ConfigImport
-from Model import Model
 
 # define the constants and variables
 Config = ConfigImport()
 
-class QuestionHandler:
+class FeedbackHandler:
     def __init__(self, app):
-        model = Model()
-
-        @app.route('/api/v1/question', methods=['POST'])
-        def question():
-            global Config
+        @app.route('/api/v1/feedback/<feedbackFor>', methods=['POST'])
+        def feedback(feedbackFor):
             try:
                 if 'Content-Type' in request.headers and request.headers['Content-Type'] == 'application/json':
-                    if "question" not in request.json:
-                        raise "Invalid content, question not present"
+                    for key in ['correlationId', 'value', 'question', 'partAnswer']:
+                        if key not in request.json:
+                            raise "Invalid content, %s not present" % key
                     
                     response = {}
                     response["apiversion"] = Config.Get("api/version")
-                    response["result"] = model.Answer(request.json["question"])
+                    response["result"] = {
+                        "context": {
+                            "feedbackFor": feedbackFor,
+                            "correlationId": request.json["correlationId"],
+                            "value": request.json["value"],
+                            "question": request.json["question"],
+                            "partAnswer": request.json["partAnswer"]
+                        }
+                    }
+
+                    ## TODO: log the feedback to a csv log file in structured way
 
                     resp = jsonify(response)
                     resp.status_code = 200

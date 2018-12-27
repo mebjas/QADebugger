@@ -53,14 +53,14 @@ WidgetHandler.prototype.GetWidget = function (question, widget, correlationid) {
             htmlContent += "</div>";
         }
     } else if (widget.displayContract == "textarea") {
-        htmlContent += "<textarea style='width: 100%;min-height: 100px' readonly>" +widget.value +"</textarea>";
+        htmlContent += "<textarea style='width: 100%;min-height: 400px' readonly>" +widget.value +"</textarea>";
     }
 
     htmlContent += "</div>"; 
     return htmlContent;  
 }
 
-WidgetHandler.prototype.Render = function(response, correlationid) {
+WidgetHandler.prototype.Render = function(response, correlationid, showRawResponse) {
     var question = response.result.question;
     var widgets = response.result.widgets;
     $this = this;
@@ -69,16 +69,18 @@ WidgetHandler.prototype.Render = function(response, correlationid) {
         $this.target.append($this.GetWidget(question, widget, correlationid));
     });
 
-    $this.target.append(
-        $this.GetWidget(
-            question,
-            {
-                displayContract: "textarea",
-                key: "Raw Response",
-                value: JSON.stringify(response, null, '\t'),
-                widgetType: "full"
-            },
-            correlationid))
+    if (showRawResponse) {
+        $this.target.append(
+            $this.GetWidget(
+                question,
+                {
+                    displayContract: "textarea",
+                    key: "Raw Response",
+                    value: JSON.stringify(response, null, '  '),
+                    widgetType: "full"
+                },
+                correlationid))
+    }
 }
 
 //// Question Answer Handler Class Class
