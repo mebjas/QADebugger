@@ -1,9 +1,12 @@
 import sys
 from flask import Flask, request, jsonify, abort, send_from_directory, render_template
 from ConfigImport import ConfigImport
+from Feedback import FeedbackLogger, FeedbackWriter
 
 # define the constants and variables
 Config = ConfigImport()
+feedbackLogger = FeedbackLogger(Config.Get("logging/feedback/path"))
+feedbackWriter = FeedbackWriter(feedbackLogger)
 
 class FeedbackHandler:
     def __init__(self, app):
@@ -14,29 +17,30 @@ class FeedbackHandler:
                     for key in ['correlationId', 'value', 'question', 'partAnswer']:
                         if key not in request.json:
                             raise "Invalid content, %s not present" % key
-                    
+
+                    feedback = {
+                        "Question": request.json["question"],
+                        "PartAnswer": request.json["partAnswer"],
+                        "CorrelationId": request.json["correlationId"],
+                        "Value": request.json["value"]
+                    }
+
+                    feedbackWriter.Log(feedbackFor, feedback)
+                    feedback["feedbackFor"] = feedbackFor
+
                     response = {}
                     response["apiversion"] = Config.Get("api/version")
                     response["result"] = {
-                        "context": {
-                            "feedbackFor": feedbackFor,
-                            "correlationId": request.json["correlationId"],
-                            "value": request.json["value"],
-                            "question": request.json["question"],
-                            "partAnswer": request.json["partAnswer"]
-                        }
+                        "context": feedback
                     }
-
-                    ## TODO: log the feedback to a csv log file in structured way
 
                     resp = jsonify(response)
                     resp.status_code = 200
                     return resp
             except:
-                print (sys.exc_info()[1])
+                print (sys.exc_info())
                 resp = jsonify({
-                    'message': 'Internal Server Error, most likely an invalid input format.',
-                    'exception': sys.exc_info()})
+                    'message': 'Internal Server Error, most likely an invalid input format.'})
                 resp.status_code = 500
                 return resp
 

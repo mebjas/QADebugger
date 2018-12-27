@@ -3,6 +3,8 @@ import json
 from flask import Flask
 from functools import wraps
 from ConfigImport import ConfigImport
+
+sys.path.append("./Handlers")
 from BaseHanlders import BaseHanlders
 from QuestionHandler import QuestionHandler
 from FeedbackHandler import FeedbackHandler
