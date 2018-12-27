@@ -1,0 +1,131 @@
+body {
+    margin: 0px;
+    font-family: calibri;
+    padding: 0px;
+    max-height: 100%;
+    overflow-y: hidden;
+    overflow-x: hidden;
+}
+
+header {
+    display: block;
+    width: 100%;
+    background: black;
+    margin: 0px;
+    color: white;
+    padding: 10px 20px;
+    font-size: 12pt;
+}
+
+section {
+    margin: 0px;
+}
+
+.left.pane {
+    width: 30%;
+    display: inline-block;
+    /* float: left; */
+    background: #f2f2f2;
+    /* min-height: -webkit-fill-available; */
+    min-height: 100%;
+    /* padding: 10px; */
+    border-right: 1px solid #00000036;
+}
+
+.right.pane {
+    display: inline-block;
+    padding: 0px;
+    width: 70%;
+    position: absolute;
+    top: 40px;
+    right: 0px;
+}
+
+.container {
+    margin: 20px;
+}
+
+.container .heading {
+    font-size: 18pt;
+    font-weight: bold;
+}
+
+.container .body {
+    margin-top: 20px;
+}
+
+.widget {
+    display: inline-block;
+    border: 1px solid #d9d7d7;
+    margin: 10px;
+    min-width: 250px;
+}
+
+.widget.full {
+    min-width: 95%;
+}
+
+.widget .header {
+    background: #fff8a7;
+    color: #012400;
+    padding: 5px 10px;
+    font-size: 14pt;
+}
+
+.widget .body {
+    padding: 10px;
+}
+
+.widget .feedbacks {
+    padding: 5px 10px 5px 10px;
+    background: #f2f2f294;
+    border-top: 1px solid #d9d7d7;
+}
+
+.widget .feedbacks a {
+    color: black
+}
+
+.question, .answer {
+    font-size: 20pt;
+    font-weight: bold;
+    padding: 10px;
+    background: #c2c2c282;
+    margin-left: 1px;
+    border-bottom: 1px solid #96b097;
+    position: relative;
+}
+
+.answer {
+    background: white;
+    border-bottom: none;
+    font-weight: 200;
+    font-size: 20pt;
+}
+
+span.caption {
+    position: absolute;
+    top: 8px;
+    left: 4px;
+    padding: 2px 10px;
+    background: #c4c4c4fa;
+    border-radius: 90px;
+}
+
+.widgets {
+    margin-top: 20px;
+}
+
+.container .body .history {
+    background: #ffffff63;
+    margin: 1px;
+    padding: 10px;
+    font-size: 14pt;
+    border: 1px solid #0000002b;
+}
+
+.container .body .history:hover {
+    background: #c2c2c282;
+    cursor: pointer;
+    border: 1px solid black;
+}

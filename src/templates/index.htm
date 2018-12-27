@@ -1,0 +1,89 @@
+<html>
+<head>
+<title>QA Debugger Portal</title>
+<link rel="stylesheet" type="text/css" href="/static/css/index.css">
+<body>
+    <header>
+        QA Debugger Portal
+    </header>
+    <section>
+        <div class="left pane">
+            <div class="container">
+                <div class="heading">
+                    Question
+                </div>
+                <div class="body">
+                    <textarea 
+                        style="width: 100%;height: 150px;margin-bottom: 5px;font-size: 14pt;padding: 10px;" 
+                        placeholder="Question Here.."
+                        id="input_question">How to adjust the driver seat?</textarea>
+                    <button id="input_submit">Submit</button>
+                </div>
+            </div>
+            <div class="container">
+                <div class="heading">
+                    Recent Questions (in this session)
+                </div>
+                <div class="body histories" id="history_container"></div>
+            </div>
+        </div>
+        <div class="right pane" id="qaworkspace">
+            <div class="question">
+                <!-- <span class="caption">Que</span> -->
+                How to raise height of the driving seat?
+            </div>
+            <div class="answer">
+                <strong>Answer: </strong>
+                To adjust the height of driving seat, use the lever to the right of the seat. Pull it towards you to raise the seat and raise it away from you to
+                decrease the height of the seat.
+            </div>
+            <div class="widgets">
+                <div class="widget">
+                    <div class="header">Answer Type</div>
+                    <div class="body">NA</div>
+                    <div class="feedbacks">
+                        <a href="function: void(0)">correct</a> / <a href="function: void(0)">incorrect</a>
+                    </div>
+                </div>
+                <div class="widget">
+                    <div class="header">Formed Queries (keywords)</div>
+                    <div class="body">NA</div>
+                    <div class="feedbacks">
+                        <a href="function: void(0)">correct</a> / <a href="function: void(0)">incorrect</a>
+                    </div>
+                </div>
+                <div class="widget">
+                    <div class="header">Question Type classification</div>
+                    <div class="body">NA</div>
+                    <div class="feedbacks">
+                        <a href="function: void(0)">correct</a> / <a href="function: void(0)">incorrect</a>
+                    </div>
+                </div>
+                <div class="widget">
+                    <div class="header">Focus Detection</div>
+                    <div class="body">NA</div>
+                    <div class="feedbacks">
+                        <a href="function: void(0)">correct</a> / <a href="function: void(0)">incorrect</a>
+                    </div>
+                </div>
+                <div class="widget full">
+                    <div class="header">Raw Response</div>
+                    <div class="body">
+                        <textarea style="width: 100%;min-height: 100px" readonly></textarea>
+                    </div>
+                </div>
+                <div class="widget full">
+                    <div class="header">Command Center</div>
+                    <div class="body">
+                        <button>Correct Answer, Add to dataset! (hotkey: 1)</button>
+                        <button>Wrong Answer, Send Feedback! (hotkey: 2)</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="/static/js/jquery.js"></script>
+    <script src="/static/js/index.js"></script>
+</body>
+</head>
+</html>
